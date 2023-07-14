@@ -1,0 +1,66 @@
+@import url("./main.css");
+
+/* action log */
+
+.action {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.action .action--wrap {
+    width: calc(100% - 200px);
+}
+.action .action--wrap .action--main {
+    padding: 65px 90px;
+    background-color: #f5f5f5;
+    width: 100%;
+    height: calc(100vh - 45px);
+}
+
+.action .action--wrap .action--main .search {
+    display: flex;
+    
+}
+.action .action--wrap .action--main .search .seacrch--title{ 
+    width: 80%;
+    height: 40px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.action .action--wrap .action--main .search .serch--input{
+    background-color: #f5f5f5;
+    display: flex;
+}
+.action .action--wrap .action--main .search .serch--input .serch--input__submit{
+margin-left: 10px;
+}
+/* paging */
+.action .action--wrap .action--main .paging{
+    position: absolute;
+    bottom: 65px;
+    width: calc(100% - 380px);
+}
+.action .action--wrap .action--main .paging .paging--posstion{
+    display: flex;
+    
+    justify-content: center;
+}
+.action .action--wrap .action--main .paging .paging--posstion .paging--posstion__index{
+    width: 50px;
+    height: 50px;
+    background-color: #588EF8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    margin-right: 15px;
+    color: #FFF;
+    font-weight: 700;
+}
+.action .action--wrap .action--main .paging .paging--posstion .paging--posstion__index:hover{
+    background-color: blue;
+    cursor: pointer;
+}

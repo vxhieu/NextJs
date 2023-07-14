@@ -1,0 +1,30 @@
+.header {
+    height: 45px;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 5px;
+    /* box-shadow: 0 0 16px rgb(23 27 42 / 24%); */
+    /* z-index: 2; */
+}
+.header .header--account {
+    display: flex;
+    align-items: center;
+}
+ .header .header--account .header--account__image span img {
+    width:16px;
+    height: 100%;
+   
+}
+.header .header--account  .header--account__name{
+    margin-left:  10px;
+}
+
+ 
+/*responsive*/
+@media only screen and (max-width: 576px){
+    .header {
+        display:none;
+    }
+}
