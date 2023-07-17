@@ -1,19 +1,16 @@
-import "../../styles/layout/login.css"
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-import { useEffect } from "react";
+"use client"; // This is a client component 👈🏽
+import { signIn } from 'next-auth/react';
+import { useState, useEffect } from "react";
+import "../../styles/layout/login.css";
 
 const Login = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    useEffect(() => {
-
-
-    }, []);
-    const onSubmit = () => {
-
-    }
-
+    const handleLoginUser = async () => {
+        await signIn('credentials', {
+            name, password, redirect: true, callbackUrl: "/DashBoard"
+        });
+    };
     return (
         <div className="login">
             <div className="login--form">
@@ -39,7 +36,7 @@ const Login = () => {
                 </div>
                 <div className="login--form__submit">
                     <div className="submit--login">
-                        <button className="btn accept" onClick={onSubmit}>LOGIN</button>
+                        <button className="btn accept" onClick={handleLoginUser}>LOGIN</button>
                     </div>
                     <div className="submit--create">or create new account</div>
                 </div>

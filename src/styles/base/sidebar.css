@@ -40,7 +40,7 @@
     }
     .sidebar--responsive{
         display: none;
-        width: 94px;
+        width: 47%;
         height: 100vh;
         position: absolute;
         background-color: #FFF;
