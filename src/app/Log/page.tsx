@@ -2,9 +2,214 @@
 import SideBar from "@/components/SideBar";
 import Header from "@/components/Header";
 import "../../styles/layout/log.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMemo, useRef } from "react";
+import Pagination from "@/components/Pagination";
+const pageSize = 6;
 const ActionLog = () => {
   const [selected, setSelected] = useState(false);
+  const [valueSeacrh, setValueSeacrh] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const data: {
+    name: string;
+    mac: string;
+    ip: string;
+    created: string;
+    powerConsumption: number;
+  }[] = [
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "TV",
+      ip: "172.0.2",
+      mac: "00:1B:44:11:3A:B7",
+      created: "2021-05-31",
+      powerConsumption: 50,
+    },
+    {
+      name: "Washer",
+      ip: "172.0.3",
+      mac: "00:1B:44:11:3A:B8",
+      created: "2021-05-31",
+      powerConsumption: 60,
+    },
+    {
+      name: "Refrigerator",
+      ip: "172.0.4",
+      mac: "00:1B:44:11:3A:B9",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+    {
+      name: "Selling Fan",
+      ip: "172.0.5",
+      mac: "00:1B:44:11:3A:B2",
+      created: "2021-05-31",
+      powerConsumption: 80,
+    },
+  ];
+  const [dataDevice, setDataDevice] = useState(data);
+  useEffect(() => {}, [valueSeacrh]);
+  const handleSearchClick = () => {
+    console.log(valueSeacrh);
+
+    if (valueSeacrh === "") {
+      setDataDevice(data);
+      return;
+    }
+    const filterBySearch = data.filter((item) => {
+      if (item.name.toLowerCase().includes(valueSeacrh.toLowerCase())) {
+        return item;
+      }
+      return null; // Return null for non-string or invalid items
+    });
+
+    setDataDevice(filterBySearch);
+  };
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return dataDevice.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, dataDevice]);
+
   return (
     <div className="action">
       <SideBar selected={selected} />
@@ -24,10 +229,14 @@ const ActionLog = () => {
                     marginBottom: "0px",
                     height: "41px",
                   }}
+                  value={valueSeacrh}
+                  onChange={(e) => setValueSeacrh(e.target.value)}
                 />
               </div>
               <div className="serch--input__submit">
-                <button className="btn">Search</button>
+                <button className="btn" onClick={handleSearchClick}>
+                  Search
+                </button>
               </div>
             </div>
           </div>
@@ -49,12 +258,24 @@ const ActionLog = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {currentTableData.map((device, index) => (
+                  <tr key={index}>
+                    <td>{device.name}</td>
+                    <td>{device.mac}</td>
+                    <td>{device.ip}</td>
+                    <td>{device.created}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
-          <div className="paging">
-            <div className="paging--posstion"></div>
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalCount={dataDevice.length}
+            pageSize={pageSize}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </div>
       </div>
     </div>
