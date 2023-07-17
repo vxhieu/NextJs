@@ -189,8 +189,6 @@ const ActionLog = () => {
   const [dataDevice, setDataDevice] = useState(data);
   useEffect(() => {}, [valueSeacrh]);
   const handleSearchClick = () => {
-    console.log(valueSeacrh);
-
     if (valueSeacrh === "") {
       setDataDevice(data);
       return;
@@ -199,6 +197,9 @@ const ActionLog = () => {
       if (item.name.toLowerCase().includes(valueSeacrh.toLowerCase())) {
         return item;
       }
+      console.log(item);
+      console.log(valueSeacrh);
+
       return null; // Return null for non-string or invalid items
     });
 
