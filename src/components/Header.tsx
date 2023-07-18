@@ -1,13 +1,8 @@
 import imageUser from "../assets/img/user.svg";
 import "../styles/base/header.css";
-// import { useSession } from "next-auth/client"
-// import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
 const Header = () => {
-  // const [session, loading] = useSession()
-  //   const router = useRouter();
-  // if (session) {
-  //     router.push("/");
-  // }
+  const { data: session } = useSession();
   return (
     <div className="header">
       <div className="header--account">
@@ -16,7 +11,13 @@ const Header = () => {
             <img src={imageUser} />
           </span>
         </div>
-        <div className="header--account__name">Welcome {}</div>
+        {session?.user ? (
+          <div className="header--account__name">
+            Welcome {session.user.name}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

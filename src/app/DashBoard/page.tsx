@@ -3,13 +3,14 @@ import SideBar from "@/components/SideBar";
 import Header from "@/components/Header";
 import DataChart from "@/components/DataChart";
 import "../../styles/layout/dashboard.css";
-import { useEffect, useState, useRef, useMemo } from "react";
-import $ from "jquery";
+import { useState, useRef, useMemo } from "react";
 const DashBoard = () => {
   const [deviceName, setDeviceName] = useState("");
   const [deviceIp, setDeviceIP] = useState("");
   const inputFocus = useRef();
   const [selected, setSelected] = useState(true);
+  const [requireName, setRequireName] = useState("");
+  const [requireIp, setRequireIp] = useState("");
   const device: {
     name: string;
     mac: string;
@@ -111,26 +112,21 @@ const DashBoard = () => {
     return Math.floor(Math.random() * 100) + 1;
   };
   const validateDevice = (deviceName, deviceIp) => {
-    if (!deviceName && !deviceIp) {
-      $(".deviceName").text("Name Is Require.");
-      $(".deviceIp").text("Ip Is Require.");
-      return false;
-    }
     if (!deviceName) {
-      $(".deviceName").text("Name Is Require.");
-      return false;
+      setRequireName("Name is required");
     } else {
-      $(".deviceName").text("");
+      setRequireName("");
     }
     if (!deviceIp) {
-      $(".deviceIp").text("Ip Is Require.");
-      return false;
+      setRequireIp("Ip is required");
     } else {
-      $(".deviceIp").text("");
+      setRequireIp("");
     }
-    return true;
+    if (deviceName && deviceIp) {
+      return true;
+    }
+    return false;
   };
-
   return (
     <div className="dashboard">
       <SideBar selected={selected} />
@@ -179,7 +175,6 @@ const DashBoard = () => {
               </tbody>
             </table>
           </div>
-
           <div className="chart">
             <div className="chart--view">
               <DataChart data={dataDevice} />
@@ -197,7 +192,7 @@ const DashBoard = () => {
                     }}
                     className="input deviceName"
                   />
-                  <div className="deviceName err"></div>
+                  <div className="deviceName err">{requireName}</div>
                 </div>
                 <div className="data--ip">
                   <input
@@ -209,7 +204,7 @@ const DashBoard = () => {
                       setDeviceIP(e.target.value);
                     }}
                   />
-                  <div className="deviceIp err"></div>
+                  <div className="deviceIp err">{requireIp}</div>
                 </div>
               </div>
               <div className="chart--form__submit">

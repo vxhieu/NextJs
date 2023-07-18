@@ -1,10 +1,10 @@
 "use client";
 import SideBar from "@/components/SideBar";
-import Header from "@/components/Header";
 import "../../styles/layout/log.css";
 import { useEffect, useState } from "react";
 import { useMemo, useRef } from "react";
 import Pagination from "@/components/Pagination";
+import Header from "@/components/Header";
 const pageSize = 6;
 const ActionLog = () => {
   const [selected, setSelected] = useState(false);
@@ -201,8 +201,6 @@ const ActionLog = () => {
     setDataDevice(filterBySearch);
   };
   const currentTableData = useMemo(() => {
-    console.log(111);
-
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return dataDevice.slice(firstPageIndex, lastPageIndex);
