@@ -14,7 +14,6 @@ const DataChart = (props) => {
   };
   const getDataName = (): string[] => {
     const result: string[] = props.data.map((device) => device.name);
-    console.log(result);
     return result;
   };
   for (let i = 0; i < props.data.length; i++) {

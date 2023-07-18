@@ -196,8 +196,6 @@ const ActionLog = () => {
     const filterBySearch = data.filter((item) => {
       return item.name.toLowerCase().indexOf(valueSeacrh.toLowerCase()) !== -1;
     });
-    console.log(filterBySearch);
-
     setDataDevice(filterBySearch);
   };
   const currentTableData = useMemo(() => {

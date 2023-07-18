@@ -27,8 +27,6 @@ export const usePagination = ({
     if (totalPageNumbers >= totalPageCount) {
       return range(1, totalPageCount);
     }
-    console.log(totalCount, pageSize, (siblingCount = 1), currentPage);
-
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
     const rightSiblingIndex = Math.min(
       currentPage + siblingCount,
