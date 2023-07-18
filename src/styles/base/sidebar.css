@@ -32,6 +32,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.sidebar .sidebar--option__icon{
+    padding-right: 8px;
+}
 /* responsive */
 @media only screen and (max-width: 576px){
     .sidebar {

@@ -194,18 +194,15 @@ const ActionLog = () => {
       return;
     }
     const filterBySearch = data.filter((item) => {
-      if (item.name.toLowerCase().includes(valueSeacrh.toLowerCase())) {
-        return item;
-      }
-      console.log(item);
-      console.log(valueSeacrh);
-
-      return null; // Return null for non-string or invalid items
+      return item.name.toLowerCase().indexOf(valueSeacrh.toLowerCase()) !== -1;
     });
+    console.log(filterBySearch);
 
     setDataDevice(filterBySearch);
   };
   const currentTableData = useMemo(() => {
+    console.log(111);
+
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return dataDevice.slice(firstPageIndex, lastPageIndex);

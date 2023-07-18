@@ -1,12 +1,19 @@
 "use client"; // This is a client component 👈🏽
 import imageUser from "../assets/img/user.svg";
-import imageMenu from "../assets/img/navigation-menu.svg";
 import "../styles/base/sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import $ from "jquery";
-import Link from "next/link";
 import { memo } from "react";
+import {
+  faComputer,
+  faClockRotateLeft,
+  faGear,
+  faBars,
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
+
 const SideBar = (props) => {
   const handleSidebar = () => {
     $(".sidebar--responsive").css("display", "block");
@@ -26,13 +33,12 @@ const SideBar = (props) => {
   const handleRedirectLog = () => {
     router.push("/Log");
   };
-  console.log(props.selected);
   return (
     <>
       <div className="sidebar">
         <div className="sidebar--option">
           <div className="sidebar--option__icon">
-            <i className="fa-regular fa-computer-speaker"></i>
+            <FontAwesomeIcon icon={faComputer} style={{ fontSize: 16 }} />
           </div>
           <div className="sidebar--option__select">Device Management</div>
         </div>
@@ -42,7 +48,9 @@ const SideBar = (props) => {
           }
           onClick={handleRedirectDashBoard}
         >
-          <div className="sidebar--option__icon"> </div>
+          <div className="sidebar--option__icon">
+            <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 16 }} />{" "}
+          </div>
           <div className="sidebar--option__select">
             <div>Dashboard</div>
           </div>
@@ -53,18 +61,25 @@ const SideBar = (props) => {
           }
           onClick={handleRedirectLog}
         >
-          <div className="sidebar--option__icon"></div>
+          <div className="sidebar--option__icon">
+            <FontAwesomeIcon
+              icon={faClockRotateLeft}
+              style={{ fontSize: 16 }}
+            />
+          </div>
           <div className="sidebar--option__select">
             <div>Logs</div>
           </div>
         </div>
         <div className="sidebar--option">
-          <div className="sidebar--option__icon"></div>
-          <div className="sidebar--option__select">Device Management</div>
+          <div className="sidebar--option__icon">
+            <FontAwesomeIcon icon={faGear} style={{ fontSize: 16 }} />
+          </div>
+          <div className="sidebar--option__select">Settings</div>
         </div>
       </div>
       <div className="sidebar--nav" onClick={handleSidebar}>
-        <img src={imageMenu} />
+        <FontAwesomeIcon icon={faBars} style={{ fontSize: 12 }} />
       </div>
       <div className="sidebar--responsive">
         <div className="sidebar--responsive__account">
@@ -77,7 +92,7 @@ const SideBar = (props) => {
         <div className="sidebar--responsive__select">
           <div className="sidebar--option">
             <div className="sidebar--option__icon">
-              <i className="fa-regular fa-computer-speaker"></i>
+              <FontAwesomeIcon icon={faComputer} style={{ fontSize: 12 }} />
             </div>
             <div className="sidebar--option__select">Device Management</div>
           </div>
@@ -85,19 +100,29 @@ const SideBar = (props) => {
             className="sidebar--option selected dashboard"
             onClick={handleRedirectDashBoard}
           >
-            <div className="sidebar--option__icon"></div>
+            <div className="sidebar--option__icon">
+              <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 12 }} />{" "}
+            </div>
             <div className="sidebar--option__select">Dashboard</div>
           </div>
           <div
             className="sidebar--option logAction"
             onClick={handleRedirectLog}
           >
-            <div className="sidebar--option__icon"></div>
+            <div className="sidebar--option__icon">
+              <FontAwesomeIcon
+                icon={faClockRotateLeft}
+                className="fas computer"
+                style={{ fontSize: 12 }}
+              />
+            </div>
             <div className="sidebar--option__select">Logs</div>
           </div>
           <div className="sidebar--option">
-            <div className="sidebar--option__icon"></div>
-            <div className="sidebar--option__select">Device Management</div>
+            <div className="sidebar--option__icon">
+              <FontAwesomeIcon icon={faGear} style={{ fontSize: 12 }} />
+            </div>
+            <div className="sidebar--option__select">Settings</div>
           </div>
         </div>
       </div>
