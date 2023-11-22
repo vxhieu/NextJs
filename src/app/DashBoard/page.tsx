@@ -78,7 +78,6 @@ const DashBoard = () => {
       }
       setDeviceName("");
       setDeviceIP("");
-      inputFocus.current.focus();
     }
   };
   const getTotal = useMemo(() => {
@@ -111,7 +110,7 @@ const DashBoard = () => {
   const generateRandomPower = () => {
     return Math.floor(Math.random() * 100) + 1;
   };
-  const validateDevice = (deviceName, deviceIp) => {
+  const validateDevice = (deviceName: string, deviceIp: string) => {
     if (!deviceName) {
       setRequireName("Name is required");
     } else {
@@ -183,7 +182,6 @@ const DashBoard = () => {
               <div className="chart--form__data">
                 <div className="data--name">
                   <input
-                    ref={inputFocus}
                     type="text"
                     placeholder="name"
                     value={deviceName}

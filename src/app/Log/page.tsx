@@ -268,7 +268,7 @@ const ActionLog = () => {
             currentPage={currentPage}
             totalCount={dataDevice.length}
             pageSize={pageSize}
-            onPageChange={(page) => setCurrentPage(page)}
+            onPageChange={(page:any) => setCurrentPage(page)}
           />
         </div>
       </div>

@@ -14,7 +14,7 @@ import {
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 
-const SideBar = (props) => {
+const SideBar = (props:any) => {
   const handleSidebar = () => {
     $(".sidebar--responsive").css("display", "block");
     $(".sidebar--nav").css("display", "none");

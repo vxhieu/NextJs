@@ -1,19 +1,19 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { memo } from "react";
-const DataChart = (props) => {
+const DataChart = (props:any) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const backgroundColors: string[] = [];
   const borderColor: string[] = [];
   const getDataDevice = (): number[] => {
     const result: number[] = props.data.map(
-      (device) => device.powerConsumption
+      (device:any) => device.powerConsumption
     );
 
     return result;
   };
   const getDataName = (): string[] => {
-    const result: string[] = props.data.map((device) => device.name);
+    const result: string[] = props.data.map((device:any) => device.name);
     return result;
   };
   for (let i = 0; i < props.data.length; i++) {
@@ -22,7 +22,7 @@ const DataChart = (props) => {
     borderColor.push("#" + randomColor);
   }
   const dataChart = {
-    labels: props.data.map((device) => device.name),
+    labels: props.data.map((device:any) => device.name),
     datasets: [
       {
         label: "My First Dataset",
