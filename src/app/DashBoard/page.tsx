@@ -3,7 +3,7 @@ import SideBar from "@/components/SideBar";
 import Header from "@/components/Header";
 import DataChart from "@/components/DataChart";
 import "../../styles/layout/dashboard.css";
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 const DashBoard = () => {
   const [deviceName, setDeviceName] = useState("");
   const [deviceIp, setDeviceIP] = useState("");
@@ -11,6 +11,7 @@ const DashBoard = () => {
   const [selected, setSelected] = useState(true);
   const [requireName, setRequireName] = useState("");
   const [requireIp, setRequireIp] = useState("");
+  const [items,setItems] = useState([]);
   const device: {
     name: string;
     mac: string;
@@ -48,6 +49,27 @@ const DashBoard = () => {
     },
   ];
   const [dataDevice, setDataDevice] = useState(device);
+  useEffect(() => {
+    const storedItems: string | null = localStorage.getItem('items');
+    console.log(storedItems);
+  
+    if (storedItems === null) {
+      localStorage.setItem('items', JSON.stringify(dataDevice));
+    } else {
+      try {
+        const items = JSON.parse(storedItems);
+  
+        if (JSON.stringify(items) !== JSON.stringify(dataDevice)) {
+          setDataDevice(items);
+        } else {
+          localStorage.setItem('items', JSON.stringify(dataDevice));
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    }
+  }, [dataDevice, setDataDevice]);
+  
   const handleAddDevice = () => {
     if (validateDevice(deviceName, deviceIp)) {
       const deviceValue = dataDevice.filter(
