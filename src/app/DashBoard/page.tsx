@@ -51,17 +51,14 @@ const DashBoard = () => {
   const [dataDevice, setDataDevice] = useState(device);
   useEffect(() => {
     const storedItems: string | null = localStorage.getItem('items');
-    console.log(storedItems);
-  
+    
     if (storedItems === null) {
       localStorage.setItem('items', JSON.stringify(dataDevice));
     } else {
       try {
         const items = JSON.parse(storedItems);
   
-        if (JSON.stringify(items) !== JSON.stringify(dataDevice)) {
-          setDataDevice(items);
-        } else {
+        if (JSON.stringify(items) !== JSON.stringify(dataDevice) && dataDevice.length > items.length ) {
           localStorage.setItem('items', JSON.stringify(dataDevice));
         }
       } catch (error) {
@@ -69,6 +66,13 @@ const DashBoard = () => {
       }
     }
   }, [dataDevice, setDataDevice]);
+  useEffect(()=>{
+    const storedItems: string | null = localStorage.getItem('items');
+    if (storedItems !== null) {
+       const items = JSON.parse(storedItems);
+      setDataDevice(items);
+    }
+  },[])
   
   const handleAddDevice = () => {
     if (validateDevice(deviceName, deviceIp)) {
