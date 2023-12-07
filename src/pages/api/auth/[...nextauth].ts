@@ -19,7 +19,7 @@ export default NextAuth({
           throw new Error("Invalid credentials");
         }
 
-        return { id: 'user_id', name: 'john' }; 
+        return { id: 'user_id', name: 'john' };
       }
     })
   ],
